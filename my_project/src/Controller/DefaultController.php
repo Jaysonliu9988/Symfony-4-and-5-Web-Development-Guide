@@ -10,7 +10,7 @@ use App\Entity\User;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/default", name="default")
+     * @Route("/", name="default")
      */
 
 
@@ -26,12 +26,18 @@ class DefaultController extends AbstractController
 
     public function index()
     {
+        // $users =[];
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
 
-        $user = new User;
+        $gifts = ['flowers', 'car', 'piano', 'money'];
+
+        shuffle($gifts);
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
             'users' => $users,
+            'random_gift' => $gifts,
+
         ]);
 
 
